@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // WA Format
         const phone = "6285962740466";
-        const waText = `Halo Siti & Erfan,\n\nSaya ingin mengonfirmasi kehadiran undangan pernikahan kalian.\n\n*Nama:* ${name}\n*Kehadiran:* ${attendance}\n*Pesan:* ${message}`;
+        const waText = `Assalamu’alaikum warahmatullahi wabarakatuh, Siti & Erfan,\n\nSaya ingin mengonfirmasi kehadiran undangan pernikahan kalian.\n\n*Nama:* ${name}\n*Kehadiran:* ${attendance}\n*Pesan:* ${message}`;
         const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(waText)}`;
         
         // UI Feedback
