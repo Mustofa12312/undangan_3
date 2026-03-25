@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Countdown Timer (20 Dec 2026 08:00:00)
-    const target = new Date(2026, 11, 20, 8, 0, 0).getTime();
+    const target = new Date(2026, 3, 1, 8, 0, 0).getTime();
     setInterval(() => {
         const dist = target - new Date().getTime();
         if (dist < 0) return;
@@ -84,20 +84,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000);
 
     // Form RSVP Simulation
+    // Form RSVP to WhatsApp
     document.getElementById('rsvp-form').addEventListener('submit', (e) => {
         e.preventDefault();
         const btn = e.target.querySelector('button');
-        const txt = btn.innerText;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Mengirim...'; 
+        const originalText = btn.innerText;
+        
+        // Form Data
+        const formData = new FormData(e.target);
+        const name = formData.get('nama');
+        const attendance = formData.get('kehadiran');
+        const message = formData.get('pesan');
+        
+        // WA Format
+        const phone = "6285962740466";
+        const waText = `Halo Siti & Erfan,\n\nSaya ingin mengonfirmasi kehadiran undangan pernikahan kalian.\n\n*Nama:* ${name}\n*Kehadiran:* ${attendance}\n*Pesan:* ${message}`;
+        const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(waText)}`;
+        
+        // UI Feedback
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Mengarahkan ke WhatsApp...'; 
         btn.disabled = true;
         
         setTimeout(() => {
-            btn.innerText = txt; 
+            // Open WA
+            window.open(waUrl, '_blank');
+            
+            // Reset UI
+            btn.innerText = originalText; 
             btn.disabled = false;
             document.getElementById('rsvp-alert').classList.remove('hidden');
             e.target.reset();
             setTimeout(() => document.getElementById('rsvp-alert').classList.add('hidden'), 5000);
-        }, 1500);
+        }, 1200);
     });
 
     // Falling particles for elegant touch
